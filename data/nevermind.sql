@@ -23,3 +23,16 @@ CREATE TABLE IF NOT EXISTS tb_user_role (
 );
 
 INSERT INTO tb_role (name, created_at) VALUES ( 'ROLE_USER', NOW() );
+
+CREATE TABLE IF NOT EXISTS tb_account (
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    public_key TEXT NOT NULL,
+    private_key_encrypted TEXT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(2000),
+    last_seen TIMESTAMP,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES tb_user(id) ON DELETE CASCADE
+);

@@ -1,10 +1,9 @@
 package com.nevermind.server.domain.port.out;
 
-import com.nevermind.server.domain.entity.user.Role;
-import com.nevermind.server.domain.entity.user.User;
+import com.nevermind.server.domain.entity.Role;
+import com.nevermind.server.domain.entity.User;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public interface UserPort {
 

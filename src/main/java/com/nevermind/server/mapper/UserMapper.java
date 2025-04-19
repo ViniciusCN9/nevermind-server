@@ -1,9 +1,8 @@
 package com.nevermind.server.mapper;
 
-import com.nevermind.server.domain.dto.auth.LoginOutbound;
 import com.nevermind.server.domain.dto.auth.SignupOutbound;
-import com.nevermind.server.domain.entity.user.Role;
-import com.nevermind.server.domain.entity.user.User;
+import com.nevermind.server.domain.entity.Role;
+import com.nevermind.server.domain.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

@@ -1,6 +1,7 @@
-package com.nevermind.server.domain.entity.user;
+package com.nevermind.server.domain.entity;
 
 import com.nevermind.server.domain.entity.Default;
+import com.nevermind.server.domain.entity.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,7 +28,7 @@ public class User extends Default implements UserDetails {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "tb_user_role",
             joinColumns = @JoinColumn(name = "user_id"),

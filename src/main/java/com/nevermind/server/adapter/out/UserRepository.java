@@ -1,13 +1,12 @@
 package com.nevermind.server.adapter.out;
 
-import com.nevermind.server.domain.entity.user.Role;
-import com.nevermind.server.domain.entity.user.User;
+import com.nevermind.server.domain.entity.Role;
+import com.nevermind.server.domain.entity.User;
 import com.nevermind.server.domain.port.out.UserPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
 @RequiredArgsConstructor

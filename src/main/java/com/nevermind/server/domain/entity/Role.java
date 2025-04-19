@@ -1,4 +1,4 @@
-package com.nevermind.server.domain.entity.user;
+package com.nevermind.server.domain.entity;
 
 import com.nevermind.server.domain.entity.Default;
 import jakarta.persistence.*;

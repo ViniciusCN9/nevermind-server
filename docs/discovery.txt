@@ -1,0 +1,44 @@
+Funcionalidades V1
+
+-> O servidor ficará em execução em uma máquina remota enquanto o client será instalado
+localmente pelos usuários. Criar ou utilizar um assistente de instalação.
+
+-> Quando o usuário abrir o client ele criará uma conta com:
+    ID
+    USERNAME
+    PASSWORD
+    EMAIL
+    NAME
+    DESCRIPTION
+
+-> Após criada a conta o client gerará as chaves pública e privada. As chaves serão
+armazenadas no dispositivo e a chave pública enviada para o servidor que será vinculada
+com a conta. A chave privada será criptografada com um hash da senha do usuário e enviada
+para o servidor em caso de acesso via outro dispositivo.
+
+-> Quando o usuário está logado o client abrirá uma conexão com o servidor via websocket
+que indicará que está online. Nesse momento o servidor enviará as informações de todos os
+usuários incluindo as chaves públicas utilizadas nos chats. Essas informações podem ser
+salvas em um cache local para evitar sobrecarga e atualizadas caso necessário como por
+exemplo a criação de um novo usuário.
+
+-> Quando a conexão websocket é encerrada o servidor armazena o timestamp da última
+conexão com isso será possível visualizar todos os usuários do Nevermind e se estão online
+ou quando foi a última vez que entraram.
+
+-> Quando selecionado um chat é possível escrever uma mensagem que será criptografada com
+uma chave AES gerada individualmente, essa chave será criptografada com a chave RSA pública
+do destinatário. Nesse momento o client do destinatário será notificado da mensagem caso
+esteja online, ou quando fizer login ele verá que existe uma mensagem não lida. Quando o
+destinatário abrir a mensagem o servidor atualizará a data de leitura. Enquanto isso o
+remetente salvará localmente as mensagens enviadas.
+
+-> O usuário poderá realizar o backup das suas mensagens locais, que será criptografado
+com um hash de sua senha e enviado para o servidor. Desse modo caso acesse via outro
+dispositivo conseguirá importar o backup e ler o histórico de mensagens enviadas/recebidas.
+
+-> O remetente online conseguirá ver que alguem está digitando para ele através de eventos
+via websocket.
+
+-> Para sabe os usuários online o servidor terá um Map com todas as sessões ativas e
+notificará todos os usuários online caso alguém entre ou saia.

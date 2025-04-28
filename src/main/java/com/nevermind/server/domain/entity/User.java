@@ -1,13 +1,10 @@
 package com.nevermind.server.domain.entity;
 
-import com.nevermind.server.domain.entity.Default;
-import com.nevermind.server.domain.entity.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
@@ -25,31 +22,14 @@ public class User extends Default implements UserDetails {
     @Column(name = "password_hash", nullable = false, columnDefinition = "TEXT")
     private String passwordHash;
 
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "tb_user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles;
-
-    public User(String username, String passwordHash, String email, Set<Role> roles) {
+    public User(String username, String passwordHash) {
         this.username = username;
         this.passwordHash = passwordHash;
-        this.email = email;
-        this.roles = roles;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
-        return authorities;
+        return List.of();
     }
 
     public String getPassword() {

@@ -2,11 +2,10 @@ package com.nevermind.server.domain.service;
 
 import com.nevermind.server.config.exception.BadRequestCustomException;
 import com.nevermind.server.config.security.JwtService;
-import com.nevermind.server.domain.dto.auth.SignupInbound;
-import com.nevermind.server.domain.dto.auth.SignupOutbound;
-import com.nevermind.server.domain.dto.auth.LoginInbound;
-import com.nevermind.server.domain.dto.auth.LoginOutbound;
-import com.nevermind.server.domain.entity.Role;
+import com.nevermind.server.domain.dto.SignupInbound;
+import com.nevermind.server.domain.dto.SignupOutbound;
+import com.nevermind.server.domain.dto.LoginInbound;
+import com.nevermind.server.domain.dto.LoginOutbound;
 import com.nevermind.server.domain.entity.User;
 import com.nevermind.server.domain.port.in.AuthUseCase;
 import com.nevermind.server.domain.port.out.UserPort;
@@ -20,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -32,18 +30,14 @@ public class AuthService implements AuthUseCase {
     private final JwtService jwtService;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    private final static String ROLE_USER = "ROLE_USER";
-
     @Override
     @Transactional
     public SignupOutbound signup(SignupInbound inbound) {
-        verifyUserAlreadyExists(inbound.getEmail(), inbound.getUsername());
+        verifyUserAlreadyExists(inbound.getUsername());
 
         User user = new User(
                 inbound.getUsername(),
-                passwordEncoder.encode(inbound.getPassword()),
-                inbound.getEmail(),
-                Set.of(getUserRole()));
+                passwordEncoder.encode(inbound.getPassword()));
         User createdUser = userPort.saveUser(user);
 
         return userMapper.toSignupOutbound(createdUser);
@@ -65,17 +59,10 @@ public class AuthService implements AuthUseCase {
         return new LoginOutbound(jwtService.generateToken(user), jwtService.getExpirationTime());
     }
 
-    private void verifyUserAlreadyExists(String email, String username) {
-        Optional<User> userWithSameEmail = userPort.findByUsername(email);
+    private void verifyUserAlreadyExists(String username) {
         Optional<User> userWithSameUsername = userPort.findByUsername(username);
-
-        if (userWithSameEmail.isPresent() || userWithSameUsername.isPresent()) {
+        if (userWithSameUsername.isPresent()) {
             throw new BadRequestCustomException("User already exists");
         }
-    }
-
-    private Role getUserRole() {
-        return userPort.findRoleByName(ROLE_USER)
-                .orElseThrow(() -> new NoSuchElementException("User role not found"));
     }
 }

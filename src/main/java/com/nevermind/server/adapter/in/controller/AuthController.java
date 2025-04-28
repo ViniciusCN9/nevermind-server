@@ -1,11 +1,10 @@
-package com.nevermind.server.adapter.in;
+package com.nevermind.server.adapter.in.controller;
 
-import com.nevermind.server.domain.dto.auth.LoginInbound;
-import com.nevermind.server.domain.dto.auth.LoginOutbound;
-import com.nevermind.server.domain.dto.auth.SignupInbound;
-import com.nevermind.server.domain.dto.auth.SignupOutbound;
+import com.nevermind.server.domain.dto.LoginInbound;
+import com.nevermind.server.domain.dto.LoginOutbound;
+import com.nevermind.server.domain.dto.SignupInbound;
+import com.nevermind.server.domain.dto.SignupOutbound;
 import com.nevermind.server.domain.port.in.AuthUseCase;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.nevermind.server.domain.dto.auth;
+package com.nevermind.server.domain.dto;
 
 import lombok.Data;
 
@@ -11,8 +11,6 @@ public class SignupOutbound {
 
     private Integer id;
     private String username;
-    private String email;
-    private Set<String> roles;
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
 }

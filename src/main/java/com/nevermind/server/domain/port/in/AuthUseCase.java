@@ -1,9 +1,9 @@
 package com.nevermind.server.domain.port.in;
 
-import com.nevermind.server.domain.dto.auth.SignupInbound;
-import com.nevermind.server.domain.dto.auth.SignupOutbound;
-import com.nevermind.server.domain.dto.auth.LoginInbound;
-import com.nevermind.server.domain.dto.auth.LoginOutbound;
+import com.nevermind.server.domain.dto.SignupInbound;
+import com.nevermind.server.domain.dto.SignupOutbound;
+import com.nevermind.server.domain.dto.LoginInbound;
+import com.nevermind.server.domain.dto.LoginOutbound;
 
 public interface AuthUseCase {
 

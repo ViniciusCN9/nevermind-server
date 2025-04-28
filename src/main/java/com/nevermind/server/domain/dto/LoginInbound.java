@@ -1,4 +1,4 @@
-package com.nevermind.server.domain.dto.auth;
+package com.nevermind.server.domain.dto;
 
 import lombok.Data;
 

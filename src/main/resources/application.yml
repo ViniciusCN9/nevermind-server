@@ -2,14 +2,21 @@ spring:
   application:
     name: "server"
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: ${DB_URL}
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:h2:mem:nevermind
+    username: local
+    password:
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
 springdoc:
   swagger-ui:
     enabled: true
 security:
   jwt:
     secret-key: ${JWT_SECRET_KEY}
-    expiration-time: 3600000
+    expiration-time: 604800000

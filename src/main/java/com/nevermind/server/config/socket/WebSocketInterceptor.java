@@ -24,13 +24,15 @@ public class WebSocketInterceptor implements HandshakeInterceptor {
     public boolean beforeHandshake(@NonNull ServerHttpRequest request, @NonNull ServerHttpResponse response, @NonNull WebSocketHandler wsHandler, @NonNull Map<String, Object> attributes) {
         String query = request.getURI().getQuery();
         if (query != null && query.startsWith("token=")) {
-            String token = query.substring(6);
+            String token = query.substring(6, query.indexOf("&"));
+            String publicKey = query.substring(query.indexOf("&") + 8);
 
             try {
                 String username = jwtService.extractUsername(token);
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
                 if (username != null && jwtService.isTokenValid(token, userDetails)) {
                     attributes.put("username", username);
+                    attributes.put("publicKey", publicKey);
                     return true;
                 }
             } catch (Exception ignore) { }

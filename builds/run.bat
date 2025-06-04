@@ -1,8 +1,4 @@
 @echo off
-for /f "delims=" %%i in ('powershell -NoProfile -Command "[Convert]::ToBase64String(([guid]::NewGuid()).ToByteArray())"') do set "JWT_SECRET_KEY=%%i"
-
-echo JWT_SECRET_KEY=%JWT_SECRET_KEY%
-
-java -DJWT_SECRET_KEY=%JWT_SECRET_KEY% -jar server-0.0.1-SNAPSHOT.jar
+java -DJWT_SECRET_KEY=MTk3MTcwNTQtOWFhYS00ZGE4LTg5NjUtYWU1ZTE3NmE0NDdm -jar server-0.0.1-SNAPSHOT.jar
 pause
 
